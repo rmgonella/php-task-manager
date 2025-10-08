@@ -1,0 +1,22 @@
+RewriteEngine On
+
+# Redirecionar todas as requisições para o arquivo index.php na pasta public
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ public/index.php [QSA,L]
+
+# Configurações de segurança
+<Files "*.php">
+    Order Allow,Deny
+    Allow from all
+</Files>
+
+# Bloquear acesso direto a arquivos de configuração
+<Files "config.php">
+    Order Deny,Allow
+    Deny from all
+</Files>
+
+# Configurar tipos MIME
+AddType text/css .css
+AddType application/javascript .js
